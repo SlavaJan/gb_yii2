@@ -18,8 +18,8 @@
   width: 100%;
   height: 100%;
   background: #009688;
-  -webkit-transition: -webkit-transform 0.4s;
-  transition: transform 0.4s;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
   -webkit-transform: translateX(0%) translateY(-100%);
   transform: translateX(0%) translateY(-100%);
   pointer-events: none;
@@ -445,7 +445,7 @@ a:focus {
 .material-scrolltop.danger,
 .material-scrolltop.danger:hover,
 .material-scrolltop.danger::before {
-  background-image: url('../icons/top-arrow.svg');
+  background-image: url('../img/top-arrow.svg');
   background-position: center 50%;
   background-repeat: no-repeat;
 }

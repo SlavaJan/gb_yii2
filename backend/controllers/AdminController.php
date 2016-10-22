@@ -6,6 +6,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Posts;
+use backend\models\PostAdd;
+use yii\web;
+use common\models\LoginForm;
 
 /**
  * Admin controller
@@ -29,9 +32,7 @@ class AdminController extends Controller
      */
     public function actions()
     {
-        return [
-            
-        ];
+        return [];
     }
 
     /**
@@ -41,36 +42,56 @@ class AdminController extends Controller
      */
     public function actionIndex()
     {
-        return $this -> render('dashboard', [
-            
-        ]);
+        if (!\Yii::$app->user->isGuest)
+        {
+            return $this -> render('index', []);
+        }
+        else
+        {
+            return $this->goHome();
+        }
     }
     
     public function actionTime()
     {
-        return $this -> render('time', [
-        ]);
-        
+        if (!\Yii::$app->user->isGuest)
+        {
+            return $this -> render('time', [
+            ]);
+        }
     }
     
     public function actionAdd()
     {
-        $post = new Posts();
+        if (!\Yii::$app->user->isGuest)
+        {
+        $post_form = new PostAdd();
         
-        $tweet = Yii::$app->request->post('Posts');
+        $tweet = Yii::$app->request->post('PostAdd');
         if (count($tweet))
         {
-            $post->post_text = $tweet['post_text'];
             
-            if ($post->save())
+            $picture = web\UploadedFile::getInstance($post_form, 'image');
+            $image = null;
+            if ($picture)
             {
-                $post = new Posts();
+                $image = PostAdd::uploadImage($picture);
+            }
+            
+            
+            
+            $post_form->post_text = $tweet['post_text'];
+            $post_form->post_image = $image;
+            
+            if ($post_form->createPost())
+            {
+                return $this->refresh();
             }
         }
                
         return $this -> render('add', [
-            'post' => $post
+            'post_form' => $post_form
         ]);
-        
+        }
     }
 }

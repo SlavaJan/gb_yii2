@@ -4,6 +4,7 @@
 
 use frontend\assets\BlogAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 BlogAsset::register($this);
 ?>
@@ -32,7 +33,7 @@ BlogAsset::register($this);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><i class="material-icons">&#xE871;</i> Material Blog</a>
+            <a class="navbar-brand" href="<?= Url::to(['blog/index']); ?>"><img src="img/travel/vinyl.png" class="img-responsive" style="max-width: 88px;display: inline-block;border: 5px solid #999;border-radius: 50%;"> Twistagramm</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
@@ -42,7 +43,7 @@ BlogAsset::register($this);
                 
               </ul>
             </li>
-            <li class="dropdown">
+<!--            <li class="dropdown">
               <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Filters <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 
@@ -55,11 +56,13 @@ BlogAsset::register($this);
               </ul>
             </li>
             <li><a href="page-about.html">About</a></li>
-            <li><a href="page-contact.html">Contact</a></li>
+            <li><a href="page-contact.html">Contact</a></li>-->
             <li class="dropdown hidden-sm">
-              <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+              <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Вход/Регистрация<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                
+                  <li><a href="<?= Url::to(['blog/login']); ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a></li>
+                  <li><a href="<?= Url::to(['blog/signup']); ?>"><i class="fa fa-user-plus" aria-hidden="true"></i> Новый пользователь</a></li>
+                  <li><a href="<?= Url::to(['blog/logout']); ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a></li>
               </ul>
             </li>
           </ul>
